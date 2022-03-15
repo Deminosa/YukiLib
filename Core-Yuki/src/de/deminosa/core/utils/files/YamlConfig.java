@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 
 import de.deminosa.core.YukiLib;
 
@@ -23,6 +24,17 @@ public class YamlConfig {
 	
 	public YamlConfig(String path, String file) {
 		this.file = new File(YukiLib.get().getDataFolder() + "/core/" + path + "/" + file + ".yml");
+		if(!this.file.exists()) {
+			try {
+				this.file.createNewFile();
+			} catch (IOException e) {
+			}
+		}
+		config = YamlConfiguration.loadConfiguration(this.file);
+	}
+	
+	public YamlConfig(Plugin plugin, String path, String file) {
+		this.file = new File(plugin.getDataFolder() + "/" + path + "/" + file + ".yml");
 		if(!this.file.exists()) {
 			try {
 				this.file.createNewFile();
