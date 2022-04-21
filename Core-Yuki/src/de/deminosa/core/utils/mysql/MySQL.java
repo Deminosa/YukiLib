@@ -19,15 +19,7 @@ import de.deminosa.core.utils.thread.SimpleThreadWorker;
 
 public class MySQL {
 
-	public static boolean isMySQLcon = false;
-
-	public static void createTable(String table, String clumName, ColumType type) {
-		if(!checkConnection()) return;
-		
-		new Thread(() -> {
-			YukiLib.get().getAsyncMySQL().getMySQL().queryUpdate("CREATE TABLE IF NOT EXISTS " + table + "("+clumName+" "+type.getArguments()+")");
-		}).start();
-	} 
+	public static boolean isMySQLcon = false; 
 
 	public static void query(String query) {
 		if(!checkConnection()) return;
@@ -48,7 +40,24 @@ public class MySQL {
 	public static AsyncMySQL getMySQL() {
 		return YukiLib.get().getAsyncMySQL();
 	}
+	
+	public static boolean checkConnection() {
+		if(YukiLib.get().getAsyncMySQL().getMySQL() == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	@Deprecated
+	public static void createTable(String table, String clumName, ColumType type) {
+		if(!checkConnection()) return;
+		
+		new Thread(() -> {
+			YukiLib.get().getAsyncMySQL().getMySQL().queryUpdate("CREATE TABLE IF NOT EXISTS " + table + "("+clumName+" "+type.getArguments()+")");
+		}).start();
+	}
 
+	@Deprecated
 	public static void createTable(String table, ArrayList<String> list, ArrayList<ColumType> types) {
 		if(!checkConnection()) return;
 		
@@ -69,6 +78,7 @@ public class MySQL {
 		}.start();
 	}
 
+	@Deprecated
 	public static void createTable(String table, String[] list, ColumType[] types) {
 		if(!checkConnection()) return;
 		
@@ -88,6 +98,7 @@ public class MySQL {
 		}.start();
 	}
 
+	@Deprecated
 	public static void createTable(String table, HashMap<String, ColumType> map) {
 		if(!checkConnection()) return;
 		
@@ -106,6 +117,7 @@ public class MySQL {
 		}.start();
 	}
 
+	@Deprecated
 	public static String getString(String table, String where, String match, String colum) {
 		if(!checkConnection()) return null;
 		ResultSet rs = null;
@@ -136,6 +148,7 @@ public class MySQL {
 	 * @param match
 	 * @return int
 	 */
+	@Deprecated
 	public static int getInt(String table, String colum, String where, String match) {
 		if(!checkConnection()) return -3;
 		ResultSet rs = null;
@@ -154,6 +167,7 @@ public class MySQL {
 		return -2;
 	}
 
+	@Deprecated
 	public static boolean exsistValue(String table, String where, String match, String colum) {
 		if(!checkConnection()) return false;
 		ResultSet rs = null;
@@ -173,6 +187,7 @@ public class MySQL {
 		return false;
 	}
 
+	@Deprecated
 	public static ArrayList<String> getArrayList(String table, String where, String match, String colum){
 		if(!checkConnection()) return null;
 		
@@ -193,6 +208,7 @@ public class MySQL {
 		return null;
 	}
 
+	@Deprecated
 	public static ArrayList<String> getArrayList(String table, String colum){
 		if(!checkConnection()) return null;
 		
@@ -213,59 +229,37 @@ public class MySQL {
 		return null;
 	}
 
+	@Deprecated
 	public static void set(String table, String colum, Object value) {
 		if(!checkConnection()) return;
-		new SimpleThreadWorker("Core-MySQL") {
-			@Override
-			public void update() {
-				if(YukiLib.DEBUG) System.out.println(">> set "+table+" in colum " + colum + " with the value '"+value+"'");
-				YukiLib.get().getAsyncMySQL().getMySQL().queryUpdate("INSERT INTO "+table+" ("+colum+") VALUES ('"+value+"')");
-			}
-		}.start();
+		if(YukiLib.DEBUG) System.out.println(">> set "+table+" in colum " + colum + " with the value '"+value+"'");
+		YukiLib.get().getAsyncMySQL().getMySQL().queryUpdate("INSERT INTO "+table+" ("+colum+") VALUES ('"+value+"')");
 	}
 
+	@Deprecated
 	public static void update(String table, String colum, String value, String where, String match) {
 		if(!checkConnection()) return;
-//		new SimpleThreadWorker("Core-MySQL") {
-//			@Override
-//			public void update() {
-//				if(Core.DEBUG) System.out.println(">> Update " + table + " in colum " + colum + " with value '"+value+"' and searching by " + where + " with the value '" + match + "'");
-//				Core.get().getAsyncMySQL().getMySQL().queryUpdate("UPDATE "+table+" SET "+colum+"='"+value+"' WHERE "+where+"='"+match+"'");
-//			}
-//		}.start();
 		if(YukiLib.DEBUG) System.out.println(">> Update " + table + " in colum " + colum + " with value '"+value+"' and searching by " + where + " with the value '" + match + "'");
 		YukiLib.get().getAsyncMySQL().getMySQL().queryUpdate("UPDATE "+table+" SET "+colum+"='"+value+"' WHERE "+where+"='"+match+"'");
 	}
 	
+	@Deprecated
 	public static void update(String table, String colum, int value, String where, String match) {
 		if(!checkConnection()) return;
-//		new SimpleThreadWorker("Core-MySQL") {
-//			@Override
-//			public void update() {
-//				if(Core.DEBUG) System.out.println(">> Update " + table + " in colum " + colum + " with value "+value+" and searching by " + where + " with the value '" + match + "'");
-//				Core.get().getAsyncMySQL().getMySQL().queryUpdate("UPDATE "+table+" SET "+colum+"="+value+" WHERE "+where+"='"+match+"'");
-//			}
-//		}.start();
 		if(YukiLib.DEBUG) System.out.println(">> Update " + table + " in colum " + colum + " with value "+value+" and searching by " + where + " with the value '" + match + "'");
 		YukiLib.get().getAsyncMySQL().getMySQL().queryUpdate("UPDATE "+table+" SET "+colum+"="+value+" WHERE "+where+"='"+match+"'");
 	}
 
+	@Deprecated
 	public static void deleteRow(String table, String where, String match) {
 		if(!checkConnection()) return;
 		new SimpleThreadWorker("Core-MySQL") {
 			@Override
 			public void update() {
 				YukiLib.get().getAsyncMySQL().getMySQL().
-				queryUpdate("DELETE FROM " + table + " WHERE " + where + " = '"+match+"'");
+					queryUpdate("DELETE FROM " + table + " WHERE " + where + " = '"+match+"'");
 			}
 		}.start();
-	}
-	
-	public static boolean checkConnection() {
-		if(YukiLib.get().getAsyncMySQL().getMySQL() == null) {
-			return false;
-		}
-		return true;
 	}
 
 }

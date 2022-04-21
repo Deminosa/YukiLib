@@ -38,7 +38,7 @@ public class YukiLib extends JavaPlugin{
 	public void onEnable() {
 		super.onEnable();
 		apis = new HashSet<>();
-		instance = this;
+		instance = (YukiLib) getServer().getPluginManager().getPlugin("YukiLib");
 		manager = new YukiManager();
 		
 		new WebInterface().onEnable();
@@ -101,9 +101,6 @@ public class YukiLib extends JavaPlugin{
 		Bukkit.getConsoleSender().sendMessage("§bINFO\tInit '"+dir+"'");
 		file.mkdir();
 		file.mkdirs();
-//		if(!file.mkdirs()) {
-//			throw new CoreException("can't create a dir with the path '"+dir+"'");
-//		}
 	}
 	
 	private void conMySQL() {
