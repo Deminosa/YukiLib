@@ -3,6 +3,7 @@ package de.deminosa.webinterface.utils;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -68,11 +69,23 @@ public class WebFileManager implements HttpHandler{
 			if(!WebInterface.get().getQueryResponse().isEmpty()) {
 				String queryResponse = httpExchange.getRequestURI().getQuery();
 				System.out.println("[Webinterface] Get query response '"+queryResponse+"'");
+				
+				HashMap<String, String> map = new HashMap<>();
+				String[] args = queryResponse.split("&");
+				
+				for(int i = 0; i < args.length; i++) {
+					String[] raw = args[i].split("=");
+					String key = raw[0];
+					String value = raw[1];
+					
+					map.put(key, value);
+				}
+				
 				for(QueryResponse qr : WebInterface.get().getQueryResponse()) {
 					new BukkitRunnable() {
 						@Override
 						public void run() {
-							qr.incomingResponse(queryResponse);
+							qr.incomingResponse(map);
 						}
 					}.runTask(YukiLib.get());
 				}

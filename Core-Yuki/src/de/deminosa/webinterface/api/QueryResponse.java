@@ -1,5 +1,7 @@
 package de.deminosa.webinterface.api;
 
+import java.util.HashMap;
+
 /*
 *	Class Create by Deminosa
 *	YouTube: 	Deminosa
@@ -10,6 +12,6 @@ package de.deminosa.webinterface.api;
 
 public abstract class QueryResponse {
 
-	public abstract void incomingResponse(String response);
+	public abstract void incomingResponse(HashMap<String, String> map);
 	
 }

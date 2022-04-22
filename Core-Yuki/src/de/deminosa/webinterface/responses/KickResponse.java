@@ -1,5 +1,7 @@
 package de.deminosa.webinterface.responses;
 
+import java.util.HashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -16,9 +18,9 @@ import de.deminosa.webinterface.api.QueryResponse;
 public class KickResponse extends QueryResponse{
 
 	@Override
-	public void incomingResponse(String response) {
-		if(response.startsWith("kick")) {
-			String name = response.split("=")[1];
+	public void incomingResponse(HashMap<String, String> map) {
+		if(map.containsKey("kick")) {
+			String name = map.get("kick");
 
 			Player player = Bukkit.getPlayer(name);
 			if(player != null) {

@@ -8,12 +8,13 @@ YukiLib is a library for Minecraft plugins intended to make programming a little
 ## Webinterface
 The web interface is still very young and can therefore still be expanded.
 The web interface supports query response.
+
 ```java 
 public class KickResponse extends QueryResponse{
 	@Override
-	public void incomingResponse(String response) {
-		if(response.startsWith("kick")) {
-			String name = response.split("=")[1];
+	public void incomingResponse(HashMap<String, String> map) {
+		if(map.containsKey("kick")) {
+			String name = map.get("kick");
 
 			Player player = Bukkit.getPlayer(name);
 			if(player != null) {
@@ -29,6 +30,7 @@ public class KickResponse extends QueryResponse{
 
 ## Discord / Webhook
 YukiLib also supports webhook for Discord in simplified variant.
+
 ```java 
 // Only HTTPS is Supportet
 Webhook hook = new DiscordHook(new URL("https://discord.com"));
