@@ -111,7 +111,9 @@ public class User {
 		getMessageBuilder().sendMessage(prefix, msg);
 	}
 
-	
+	public String getName() {
+		return player.getName();
+	}
 	
 	
 }

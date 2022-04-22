@@ -25,11 +25,13 @@ public class MessageBuilder {
 	}
 	
 	public void sendMessage(String prefix, String msg) {
+		prefix = ChatColor.translateAlternateColorCodes('&', msg);
+		msg = ChatColor.translateAlternateColorCodes('&', msg);
 		player.sendMessage(prefix + " " + msg);
 	}
 	
 	public void sendMessage(Text txt) {
-		player.sendMessage(txt.getString());
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', txt.getString()));
 	}
 	
 	public void sendActionbar(String msg) {
