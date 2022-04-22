@@ -26,7 +26,7 @@ public class JoinQuitListener implements Listener{
 		
 		if(checkUser(event.getPlayer())) {
 			YukiLib.get().getManager().getUserLoader().forEach((u) -> {
-				u.loaded(event, User.getUser(event.getPlayer()));
+				u.loaded(event, User.get(event.getPlayer()));
 			});
 		}
 		
@@ -56,7 +56,7 @@ public class JoinQuitListener implements Listener{
 	}
 	
 	private boolean checkUser(Player player) {
-		User u = User.getUser(player);
+		User u = User.get(player);
 		
 		return u != null;
 	}

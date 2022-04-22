@@ -35,3 +35,9 @@ Webhook hook = new DiscordHook(new URL("https://discord.com"));
 hook.send("My Message");
 ```
 
+# Core
+## Entitys
+### User
+```java
+User user = User.get(player); 
+```

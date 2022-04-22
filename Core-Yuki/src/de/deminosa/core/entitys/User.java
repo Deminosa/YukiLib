@@ -24,7 +24,7 @@ public class User {
 
 	private static final HashMap<Player, User> CACHE = new HashMap<>();
 	
-	public static User getUser(Player player) {
+	public static User get(Player player) {
 		return CACHE.get(player);
 	}
 	
