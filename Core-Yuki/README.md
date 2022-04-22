@@ -7,7 +7,9 @@ YukiLib is a library for Minecraft plugins intended to make programming a little
 
 ## Webinterface
 The web interface is still very young and can therefore still be expanded.
-The web interface supports query response. [KickResponse.java](https://github.com/Deminosa/YukiLib/blob/master/Core-Yuki/src/de/deminosa/webinterface/responses/KickResponse.java) [QueryResponse.java](https://github.com/Deminosa/YukiLib/blob/master/Core-Yuki/src/de/deminosa/webinterface/api/QueryResponse.java)
+The web interface supports query response. 
+
+[KickResponse.java](https://github.com/Deminosa/YukiLib/blob/master/Core-Yuki/src/de/deminosa/webinterface/responses/KickResponse.java) [QueryResponse.java](https://github.com/Deminosa/YukiLib/blob/master/Core-Yuki/src/de/deminosa/webinterface/api/QueryResponse.java)
 
 ```java 
 public class KickResponse implements QueryResponse {
