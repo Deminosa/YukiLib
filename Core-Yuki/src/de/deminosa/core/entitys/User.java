@@ -105,6 +105,26 @@ public class User {
 		return advancement;
 	}
 	
+	/**
+	 * <p>Checking of the Player if they from Bedrock Client.<br>
+	 * use the prefix if this is changed</p>
+	 * 
+	 * @param prefix
+	 * @return
+	 */
+	public boolean isBedrockPlayer(String prefix) {
+		return getName().startsWith(prefix);
+	}
+	
+	/**
+	 * <p>Checking of the Player if they from Bedrock Client.</p>
+	 * 
+	 * @return
+	 */
+	public boolean isBedrockPlayer() {
+		return getName().startsWith(".");
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public void sendMessage(String prefix, String msg) {
