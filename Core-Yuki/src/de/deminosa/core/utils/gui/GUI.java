@@ -26,7 +26,6 @@ import de.deminosa.core.utils.ItemBuilder;
  *
  */
 
-@Warning
 public class GUI implements Listener{
 
 	String title;
@@ -114,48 +113,6 @@ public class GUI implements Listener{
 
 		}else {
 			throw new ConfigException("Somthing is wrong! The Option has a wrong config!");
-		}
-	}
-
-	@Deprecated
-	public GUI(User cPlayer, String title) {
-		uid = new UID();
-		this.title = title + " §8§k" + IDManager.generateID(3);
-		buttons = new HashMap<>();
-		inv = Bukkit.createInventory(cPlayer.getEntity(), 54, this.title);
-		YukiLib.get().getServer().getPluginManager().registerEvents(this, YukiLib.get());
-		this.cPlayer = cPlayer;
-
-		for(int i = 0; i < inv.getSize(); i++) {
-			inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName("§8").setLore("§6").build());
-		}
-	}
-
-	@Deprecated
-	public GUI(User cPlayer, String title, int size) {
-		uid = new UID();
-		this.title = title + " §8§k" + IDManager.generateID(3);
-		buttons = new HashMap<>();
-		inv = Bukkit.createInventory(cPlayer.getEntity(), size, this.title);
-		YukiLib.get().getServer().getPluginManager().registerEvents(this, YukiLib.get());
-		this.cPlayer = cPlayer;
-
-		for(int i = 0; i < inv.getSize(); i++) {
-			inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName("§8").setLore("§6").build());
-		}
-	}
-
-	@Deprecated
-	public GUI(User cPlayer, String title, InventoryType inventoryType) {
-		uid = new UID();
-		this.title = title + " §8§k" + IDManager.generateID(3);
-		buttons = new HashMap<>();
-		inv = Bukkit.createInventory(cPlayer.getEntity(), inventoryType, this.title);
-		YukiLib.get().getServer().getPluginManager().registerEvents(this, YukiLib.get());
-		this.cPlayer = cPlayer; 
-
-		for(int i = 0; i < inv.getSize(); i++) {
-			inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName("§8").setLore("§6").build());
 		}
 	}
 

@@ -114,14 +114,14 @@ public class Table {
 			if (rs.next()){
 				T s = rs.getObject(getTableName(), clazz);
 				rs.close();
-				return s;
+				return clazz.cast(s);
 			}
 		}catch (SQLException e){
 			if(YukiLib.DEBUG) {
 				e.printStackTrace();
 			}
 		}
-		return t;
+		return clazz.cast(t);
 	}
 	
 	public void deletRow(@Nonnull Search search) {

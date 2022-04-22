@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class CoreID {
 
-	private static final String UPPER_CASE = "ABCDEF";
+	private static final String UPPER_CASE = "ABCDEFGH";
 	private static final String LOWER_CASE = UPPER_CASE.toLowerCase();
 	private static final String NUMBERS = "0123456789";
 	
@@ -16,10 +16,6 @@ public class CoreID {
 	private static final Random RANDOM = ThreadLocalRandom.current();
 	
 	public static String generate(int size) {
-//		String c = "";
-//		for(int i = 0; i < size; i++) {
-//			c = c + CHARS[RANDOM.nextInt(CHARS.length)];
-//		}
 		return generate(size, 0);
 	}
 	
