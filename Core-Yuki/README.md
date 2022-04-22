@@ -10,7 +10,7 @@ The web interface is still very young and can therefore still be expanded.
 The web interface supports query response.
 
 ```java 
-public class KickResponse extends QueryResponse{
+public class KickResponse implements QueryResponse{
 	@Override
 	public void incomingResponse(HashMap<String, String> map) {
 		if(map.containsKey("kick")) {

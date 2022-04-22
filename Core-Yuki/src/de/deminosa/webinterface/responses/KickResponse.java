@@ -15,7 +15,7 @@ import de.deminosa.webinterface.api.QueryResponse;
  *
  */
 
-public class KickResponse extends QueryResponse{
+public class KickResponse implements QueryResponse{
 
 	@Override
 	public void incomingResponse(HashMap<String, String> map) {

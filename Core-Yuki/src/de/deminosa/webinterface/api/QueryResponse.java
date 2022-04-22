@@ -10,7 +10,7 @@ import java.util.HashMap;
 *
 */
 
-public abstract class QueryResponse {
+public interface QueryResponse {
 
 	public abstract void incomingResponse(HashMap<String, String> map);
 	
