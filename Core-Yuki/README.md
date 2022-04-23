@@ -71,12 +71,12 @@ MySQL has been simplified a bit. See the example for this:
 
 ```java
 		ColumValue pos = new ColumValue("pos", User.get(player).getLocation().toString());
-		ColumValue uuid = new ColumValue("pos", player.getUniqueId().toString());
 ```
 
 - Next: Since we haven't added a value yet, we need to add a reference value first. Therefore our first value will be the player's UUID.
 
 ```java
+		ColumValue uuid = new ColumValue("UUID", player.getUniqueId().toString());
 		table.setFirstColum(uuid);
 ```
 
