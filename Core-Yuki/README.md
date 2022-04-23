@@ -46,3 +46,60 @@ hook.send("My Message");
 ```java
 User user = User.get(player); 
 ```
+
+## MySQL
+MySQL has been simplified a bit. See the example for this:
+
+- First create a table 
+
+```java
+		Table table = new Table("user");
+```
+
+- Then create all your columns and let them create your table class.
+
+```java
+		Colum colums = new Colum();
+		
+		colums.create("UUID", ColumType.UUID);
+		colums.create("pos", ColumType.VARCHAR_16);
+		
+		table.create(colums);
+```
+
+- Next you create a ColumValue class with which you assign a name and the corresponding value. Here we used the position.
+
+```java
+		ColumValue pos = new ColumValue("pos", User.get(player).getLocation().toString());
+		ColumValue uuid = new ColumValue("pos", player.getUniqueId().toString());
+```
+
+- Next: Since we haven't added a value yet, we need to add a reference value first. Therefore our first value will be the player's UUID.
+
+```java
+		table.setFirstColum(uuid);
+```
+
+- Now that we have added a reference value, we can now add the position via update.
+
+```java
+		table.updateColum(new Update(new Search("UUID", player.getUniqueId().toString()), pos));
+```
+
+- Overall it looks like this:
+
+```java
+		Table table = new Table("user");
+		Colum colums = new Colum();
+		
+		colums.create("UUID", ColumType.UUID);
+		colums.create("pos", ColumType.VARCHAR_16);
+		
+		table.create(colums);
+		
+		ColumValue pos = new ColumValue("pos", User.get(player).getLocation().toString());
+		ColumValue uuid = new ColumValue("pos", player.getUniqueId().toString());
+		table.setFirstColum(uuid);
+		
+		table.updateColum(new Update(new Search("UUID", player.getUniqueId().toString()), pos));
+```
