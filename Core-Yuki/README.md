@@ -7,7 +7,7 @@ YukiLib is a library for Minecraft plugins intended to make programming a little
 
 ## Webinterface
 The web interface is still very young and can therefore still be expanded.
-The web interface supports query response. 
+The web interface supports query response. The web interface is not secured yet. In other words, there is no login function yet and anyone can connect to it. The default port is 20000.
 
 - [KickResponse.java](https://github.com/Deminosa/YukiLib/blob/master/Core-Yuki/src/de/deminosa/webinterface/responses/KickResponse.java)
 - [QueryResponse.java](https://github.com/Deminosa/YukiLib/blob/master/Core-Yuki/src/de/deminosa/webinterface/api/QueryResponse.java)
