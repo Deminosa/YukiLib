@@ -45,7 +45,7 @@ public class WebFileManager implements HttpHandler{
 		if(files != null) {
 			for(int i = 0; i < files.length; i++) {
 				if(!files[i].isDirectory()) {
-					HttpContext ctx = WebInterface.getWebServerManager().getServer()
+					WebInterface.getWebServerManager().getServer()
 							.createContext("/" + files[i].getName(), this);
 				}
 			}
@@ -63,6 +63,7 @@ public class WebFileManager implements HttpHandler{
 		response = response.replace("%plugins%", FileUtils.getPlugins());
 		response = response.replace("%players_names%", FileUtils.getPlayers());
 		response = response.replace("%bukkit%", FileUtils.getBukkitInfo());
+		response = response.replace("%login%", "");
 
 		if(httpExchange.getRequestURI().getQuery() != null &&
 				httpExchange.getRequestURI().getQuery() != "null") {
@@ -95,14 +96,6 @@ public class WebFileManager implements HttpHandler{
 			}
 		}
 
-//		//TODO klappt nicht
-//		String ip = ((Inet4Address)httpExchange.getRemoteAddress().getAddress()).getHostAddress();
-//		System.out.println("[Webinterface] Checking Auth from '"+ip+"'");
-//		// 200
-//		if(WebInterface.get().getSpigotAuth().isAuth(ip)) {
-//			httpExchange.sendResponseHeaders(200, response.length());
-//		}
-//		
 		httpExchange.sendResponseHeaders(200, response.length());
 		OutputStream outputStream = httpExchange.getResponseBody();
 		outputStream.write(response.getBytes());

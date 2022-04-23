@@ -33,8 +33,8 @@ public class WebServerManager {
 					+ "Debug mode!");
 			Bukkit.getConsoleSender().sendMessage("§8[§c!!!§8] §c=============================");
 		}
+		
 	}
-	
 	
 	public void start() {
 		server.start();
