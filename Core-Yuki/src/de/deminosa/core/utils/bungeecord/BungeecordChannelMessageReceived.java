@@ -15,6 +15,7 @@ public class BungeecordChannelMessageReceived implements PluginMessageListener{
     
     private final BungeecordChannelMessageType type;
     private final List<String> arguments;
+    private int index = -1;
 
     public BungeecordChannelMessageReceived(BungeecordChannelMessageType type) {
         this.type = type;
@@ -64,6 +65,21 @@ public class BungeecordChannelMessageReceived implements PluginMessageListener{
         for(int i = 0; i < lines; i++){
             arguments.add(in.readUTF());
         }
+    }
+
+    public String read() {
+        index++;
+        return arguments.get(index);
+    }
+
+    public boolean isNextLine() {
+        int nextIndex = index;
+        nextIndex++;
+
+        if(nextIndex < arguments.size()){
+            return true;
+        }
+        return false;
     }
 
 }
