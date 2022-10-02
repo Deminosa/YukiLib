@@ -2,6 +2,8 @@ package de.deminosa.core.entitys;
 
 import java.util.HashMap;
 
+import javax.annotation.Nonnull;
+
 import org.bukkit.entity.Player;
 
 import com.google.common.io.ByteArrayDataOutput;
@@ -9,6 +11,7 @@ import com.google.common.io.ByteStreams;
 
 import de.deminosa.core.YukiLib;
 import de.deminosa.core.entitys.user.MessageBuilder;
+import de.deminosa.core.entitys.user.UserBungeeCord;
 import de.deminosa.core.entitys.user.UserLocation;
 import de.deminosa.core.manager.advancement.AdvancementManager;
 
@@ -32,12 +35,14 @@ public class User {
 	private final UserLocation loc;
 	private final MessageBuilder msgb;
 	private final AdvancementManager advancement;
+	private final UserBungeeCord bungeeCord;
 	
-	public User(Player player) {
+	public User(@Nonnull Player player) {
 		this.player = player;
 		loc = new UserLocation(player);
 		msgb = new MessageBuilder(player);
 		advancement = new AdvancementManager(this);
+		bungeeCord = new UserBungeeCord(this);
 		
 		CACHE.put(player, this);
 	}
@@ -56,20 +61,6 @@ public class User {
 	 */
 	public void updateCache() {
 		flush();
-	}
-
-	/**
-	 * <h1><b>Only for a Bungeecord server system or cloud</b></h1>
-	 * <p>Connect the Player to a Server</p>
-	 * @param server - Use the server name that is entered in the Bungee Config.<br />
-	 * <i>If you have a cloud, use the server name that the cloud gave you</i>
-	 */
-	public void connect(String server) {
-		player.sendMessage("§7Connecting...");
-		ByteArrayDataOutput out = ByteStreams.newDataOutput();
-		out.writeUTF("Connect");
-		out.writeUTF(server);
-		player.sendPluginMessage(YukiLib.get(), "BungeeCord", out.toByteArray());
 	}
 	
 	/**
@@ -104,25 +95,15 @@ public class User {
 	public AdvancementManager getAdvancement() {
 		return advancement;
 	}
-	
+
 	/**
-	 * <p>Checking of the Player if they from Bedrock Client.<br>
-	 * use the prefix if this is changed</p>
+	 * <p>get the UserBungeeCord. A small class for UserBungeeCord<br>
+	 * It also includes features for recognizing players on a Bedrock account. (Works only if the server is Java based.)</p>
 	 * 
-	 * @param prefix
-	 * @return
+	 * @return UserBungeeCord
 	 */
-	public boolean isBedrockPlayer(String prefix) {
-		return getName().startsWith(prefix);
-	}
-	
-	/**
-	 * <p>Checking of the Player if they from Bedrock Client.</p>
-	 * 
-	 * @return
-	 */
-	public boolean isBedrockPlayer() {
-		return getName().startsWith(".");
+	public UserBungeeCord getBungeeCord() {
+		return bungeeCord;
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
