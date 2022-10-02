@@ -16,6 +16,8 @@ import org.bukkit.inventory.Inventory;
 import de.deminosa.core.YukiLib;
 import de.deminosa.core.entitys.User;
 import de.deminosa.core.exeptions.ConfigException;
+import de.deminosa.core.exeptions.YukiLibException;
+import de.deminosa.core.utils.CoreID;
 import de.deminosa.core.utils.ItemBuilder;
 /*
  *	Class Create by Deminosa
@@ -37,7 +39,10 @@ public class GUI implements Listener{
 
 	public GUI(User cPlayer, GUIOption option) {
 		uid = new UID();
-		this.title = option.getTitle() + " ง8งk" + IDManager.generateID(3);
+
+		if(option.isUnique()) this.title = option.getTitle() + " ยง8ยงk" + CoreID.generate(3);
+		if(!option.isUnique()) this.title = option.getTitle();
+
 		buttons = new HashMap<>();
 		YukiLib.get().getServer().getPluginManager().registerEvents(this, YukiLib.get());
 		this.cPlayer = cPlayer;
@@ -52,66 +57,33 @@ public class GUI implements Listener{
 
 		if(option.isDefault()) {
 			for(int i = 0; i < inv.getSize(); i++) {
-				inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
+				inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName("ยง8").setLore("ยง6").build());
 			}
 		}else if(option.isRandomColors()) {
+			Material[] randomMats = {Material.WHITE_STAINED_GLASS_PANE, Material.ORANGE_STAINED_GLASS_PANE,
+									Material.MAGENTA_STAINED_GLASS_PANE, Material.LIGHT_BLUE_STAINED_GLASS_PANE,
+									Material.YELLOW_STAINED_GLASS_PANE, Material.LIME_STAINED_GLASS_PANE,
+									Material.PINK_STAINED_GLASS_PANE, Material.PINK_STAINED_GLASS_PANE,
+									Material.LIGHT_GRAY_STAINED_GLASS_PANE, Material.CYAN_STAINED_GLASS_PANE,
+									Material.PURPLE_STAINED_GLASS_PANE, Material.BLUE_STAINED_GLASS_PANE,
+									Material.BROWN_STAINED_GLASS_PANE, Material.GREEN_STAINED_GLASS_PANE,
+									Material.RED_STAINED_GLASS_PANE, Material.BLACK_STAINED_GLASS_PANE};
 			for(int i = 0; i < inv.getSize(); i++) {
-				int r = ThreadLocalRandom.current().nextInt(16);
-				switch(r) {
-				case 0:
-					inv.setItem(i, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 1:
-					inv.setItem(i, new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 2:
-					inv.setItem(i, new ItemBuilder(Material.MAGENTA_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 3: 
-					inv.setItem(i, new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 4:
-					inv.setItem(i, new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 5:
-					inv.setItem(i, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 6:
-					inv.setItem(i, new ItemBuilder(Material.PINK_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 7:
-					inv.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 8:
-					inv.setItem(i, new ItemBuilder(Material.LIGHT_GRAY_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 9:
-					inv.setItem(i, new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 10:
-					inv.setItem(i, new ItemBuilder(Material.PURPLE_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 11:
-					inv.setItem(i, new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 12:
-					inv.setItem(i, new ItemBuilder(Material.BROWN_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 13:
-					inv.setItem(i, new ItemBuilder(Material.GREEN_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 14:
-					inv.setItem(i, new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				case 15:
-					inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName("ง8").setLore("ง6").build());
-					break;
-				}
+				int r = ThreadLocalRandom.current().nextInt(randomMats.length);
+				inv.setItem(i, new ItemBuilder(randomMats[r]).setName("ยง8").setLore("ยง6").build());
 			}
 		}else if(option.isCleanInventory()) {
 
 		}else {
 			throw new ConfigException("Somthing is wrong! The Option has a wrong config!");
+		}
+	}
+
+	public void addButton(GUIButton guiButton) {
+		if(buttons.size() < inv.getSize()) {
+			buttons.put(buttons.size(), guiButton);
+		}else {
+			throw new YukiLibException("Inventory is full! addButton() can't execute.");
 		}
 	}
 

@@ -39,7 +39,7 @@ public class MojangSessionserver {
 				sb.append(s);
 			}
 			String result = sb.toString();
-			JsonElement element = new JsonParser().parse(result);
+			JsonElement element = JsonParser.parseString(result);
 			JsonObject obj = element.getAsJsonObject();
 			String api = obj.get("id").toString();
 			api = api.substring(1);
@@ -68,7 +68,7 @@ public class MojangSessionserver {
 				sb.append(s);
 			}
 			String result = sb.toString();
-			JsonElement element = new JsonParser().parse(result);
+			JsonElement element = JsonParser.parseString(result);
 			JsonObject obj = element.getAsJsonObject();
 			String name = obj.get("name").toString();
 			name = name.substring(1);

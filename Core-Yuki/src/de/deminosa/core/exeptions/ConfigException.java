@@ -8,7 +8,7 @@ package de.deminosa.core.exeptions;
 *
 */
 
-public class ConfigException extends RuntimeException{
+public class ConfigException extends RuntimeException {
 
 	/**
 	 * 

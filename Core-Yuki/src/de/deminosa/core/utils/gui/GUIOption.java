@@ -12,22 +12,38 @@ import org.bukkit.event.inventory.InventoryType;
 
 public class GUIOption {
 	
-	private boolean random, clean, defaul;
-	private String title = "";
-	private GUISize size = GUISize.INIT;
-	private InventoryType type = InventoryType.CHEST;
-	
-	public GUIOption() {
+	private final boolean random, clean, defaul;
+	private final String title;
+	private final GUISize size;
+	private final InventoryType type;
+	private boolean unique;
+
+	public GUIOption(boolean random, boolean clean, boolean defaul, String title, InventoryType type) {
+		this.random = random;
+		this.clean = clean;
+		this.defaul = defaul;
+		this.title = title;
+		this.type = type;
+		this.size = GUISize.INIT;
 	}
-	
-	public void setRandomColors(boolean bool) {
-		random = bool;
+
+	public GUIOption(boolean random, boolean clean, boolean defaul, String title, GUISize size) {
+		this.random = random;
+		this.clean = clean;
+		this.defaul = defaul;
+		this.title = title;
+		this.size = size;
+		this.type = null;
 	}
-	
-	public void setClanInventory(boolean bool) {
-		clean = bool;
+
+	public void setUnique(boolean unique) {
+		this.unique = unique;
 	}
-	
+
+	public boolean isUnique() {
+		return unique;
+	}
+
 	protected boolean isRandomColors() {
 		return random;
 	}
@@ -40,31 +56,16 @@ public class GUIOption {
 		return type;
 	}
 
-	public void setType(InventoryType type) {
-		this.type = type;
-	}
-
 	protected GUISize getGUISize() {
 		return size;
-	}
-
-	public void setSize(GUISize size) {
-		this.size = size;
 	}
 
 	protected String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	protected boolean isDefault() {
 		return defaul;
 	}
 
-	public void setDefaultInventory(boolean defaul) {
-		this.defaul = defaul;
-	}
 }

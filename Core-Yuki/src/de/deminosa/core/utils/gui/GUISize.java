@@ -16,7 +16,10 @@ public enum GUISize {
 	ROW_3(27),
 	ROW_4(36),
 	ROW_5(45),
-	ROW_6(54);
+	ROW_6(54),
+	
+	CHEST(27),
+	CHEST_DOUBLE(54);
 	
 	private int size;
 	
