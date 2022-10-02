@@ -107,6 +107,10 @@ public class GUI implements Listener{
 		cPlayer.getEntity().openInventory(inv);
 	}
 
+	public void open(User user) {
+		user.getEntity().openInventory(inv);
+	}
+
 	public Inventory getInventory() {
 		return inv;
 	}
@@ -116,31 +120,31 @@ public class GUI implements Listener{
 
 		if(event.getAction() == InventoryAction.UNKNOWN) event.setCancelled(true);
 		if(event.getAction() == InventoryAction.NOTHING) event.setCancelled(true);
+		if(buttons == null) return;
 
-		if(buttons != null) {
-			if(event.getWhoClicked().getOpenInventory().getTitle().equals(title)) {
-				
-				if(buttons.containsKey(event.getSlot()) && 
-						buttons.get(event.getSlot()).getIcon() != null && event.getCurrentItem() != null
-						&& event.getCurrentItem().getType() == Material.PLAYER_HEAD) {
+		if(event.getWhoClicked().getOpenInventory().getTitle().equals(title)) {
+			
+			// Player Head with custom Skin Detection
+			if(buttons.containsKey(event.getSlot()) && 
+					buttons.get(event.getSlot()).getIcon() != null && event.getCurrentItem() != null
+					&& event.getCurrentItem().getType() == Material.PLAYER_HEAD) {
 					
-					if(event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY) event.setCancelled(true);
-					if(event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) event.setCancelled(true);
-					if(event.getAction() == InventoryAction.HOTBAR_SWAP) event.setCancelled(true);
-					buttons.get(event.getSlot()).onClick(event);
+				if(event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY) event.setCancelled(true);
+				if(event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) event.setCancelled(true);
+				if(event.getAction() == InventoryAction.HOTBAR_SWAP) event.setCancelled(true);
+				buttons.get(event.getSlot()).onClick(event);
 					
-				}else if(buttons.containsKey(event.getSlot()) && buttons.get(event.getSlot()).getIcon() != null && 
-						buttons.get(event.getSlot()).getIcon().equals(event.getCurrentItem())) {
+			}else if(buttons.containsKey(event.getSlot()) && buttons.get(event.getSlot()).getIcon() != null && 
+					buttons.get(event.getSlot()).getIcon().equals(event.getCurrentItem())) {
 					
-					if(event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY) event.setCancelled(true);
-					if(event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) event.setCancelled(true);
-					if(event.getAction() == InventoryAction.HOTBAR_SWAP) event.setCancelled(true);
-					buttons.get(event.getSlot()).onClick(event);
+				if(event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY) event.setCancelled(true);
+				if(event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) event.setCancelled(true);
+				if(event.getAction() == InventoryAction.HOTBAR_SWAP) event.setCancelled(true);
+				buttons.get(event.getSlot()).onClick(event);
 					
-				}
-				event.setCancelled(true);
-				return;
 			}
+			event.setCancelled(true);
+			return;
 		}
 	}
 

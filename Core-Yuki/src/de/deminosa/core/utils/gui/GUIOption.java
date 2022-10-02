@@ -52,11 +52,11 @@ public class GUIOption {
 		return clean;
 	}
 
-	protected InventoryType getType() {
+	public InventoryType getType() {
 		return type;
 	}
 
-	protected GUISize getGUISize() {
+	public GUISize getGUISize() {
 		return size;
 	}
 
