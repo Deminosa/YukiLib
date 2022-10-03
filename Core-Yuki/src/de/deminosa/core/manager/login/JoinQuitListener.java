@@ -23,8 +23,7 @@ public class JoinQuitListener implements Listener{
 	public void onJoin(PlayerJoinEvent event) {
 		if(event.getPlayer() == null) return;
 
-		@SuppressWarnings(value = {"unchecked"})
-		User u = new User(event.getPlayer());
+		new User(event.getPlayer());
 		
 		if(checkUser(event.getPlayer())) {
 			YukiLib.get().getManager().getUserLoader().forEach((u) -> {

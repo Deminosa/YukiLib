@@ -62,7 +62,7 @@ public class WarpManager {
 		
 		if(YukiLib.WARP_IGNORE_DAMAGED) {
 			Bukkit.getConsoleSender()
-			.sendMessage("§6WARNING §rWarp is loaded but there could be errors. ("+name+")");
+			.sendMessage("Â§6WARNING Â§rWarp is loaded but there could be errors. ("+name+")");
 			return w;
 		}else {
 			throw new ConfigException("The warp '"+name+"' was corrupted or could not be verified. "
