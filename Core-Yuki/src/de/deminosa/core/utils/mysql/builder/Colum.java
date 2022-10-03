@@ -22,8 +22,7 @@ public class Colum {
 		map = new HashMap<>();
 	}
 	
-	@Nonnull
-	public void create(String columName, ColumType type) {
+	public void create(String columName, @Nonnull ColumType type) {
 		map.put(columName, type);
 	}
 	

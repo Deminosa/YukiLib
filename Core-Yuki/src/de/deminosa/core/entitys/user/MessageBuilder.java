@@ -3,7 +3,6 @@ package de.deminosa.core.entitys.user;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import de.deminosa.core.manager.messages.Text;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -30,19 +29,8 @@ public class MessageBuilder {
 		player.sendMessage(prefix + " " + msg);
 	}
 	
-	public void sendMessage(Text txt) {
-		player.sendMessage(ChatColor.translateAlternateColorCodes('&', txt.getString()));
-	}
-	
 	public void sendActionbar(String msg) {
 		String s = ChatColor.translateAlternateColorCodes('&', msg);
-		TextComponent text = new TextComponent(s);
-		BaseComponent bc = text;
-		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, bc);
-	}
-	
-	public void sendActionbar(Text txt) {
-		String s = ChatColor.translateAlternateColorCodes('&', txt.getString());
 		TextComponent text = new TextComponent(s);
 		BaseComponent bc = text;
 		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, bc);

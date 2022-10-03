@@ -15,7 +15,6 @@ public class ColumValue {
 	private final String columName;
 	private Object columValue;
 	
-	@Nonnull
 	public ColumValue(String name, @Nonnull Object obj) {
 		columName = name;
 		setColumValue(obj);
@@ -29,7 +28,7 @@ public class ColumValue {
 		return columValue;
 	}
 
-	public void setColumValue(Object columValue) {
+	public void setColumValue(@Nonnull Object columValue) {
 		this.columValue = columValue;
 	}
 	

@@ -200,7 +200,7 @@ private File userFileName;
    *
    */
   public Float getFloat(String Section, String key, Float defaultValue) {
-    Float value = new Float(0f);
+    Float value = Float.valueOf(0f);
     value = defaultValue;
     if (valuePosition(Section, key) > 0) {
       int strLen = key.length()+1;
