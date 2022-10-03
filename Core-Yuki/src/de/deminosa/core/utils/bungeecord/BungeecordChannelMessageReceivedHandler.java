@@ -11,15 +11,17 @@ import com.google.common.io.ByteStreams;
 
 import de.deminosa.core.YukiLib;
 
-public class BungeecordChannelMessageReceived implements PluginMessageListener{
+public class BungeecordChannelMessageReceivedHandler implements PluginMessageListener{
     
     private final BungeecordChannelMessageType type;
     private final List<String> arguments;
+    private final List<BungeecordChannelMessageReceivedObject> receivers;
     private int index = -1;
 
-    public BungeecordChannelMessageReceived(BungeecordChannelMessageType type) {
+    public BungeecordChannelMessageReceivedHandler(BungeecordChannelMessageType type) {
         this.type = type;
         arguments = new ArrayList<>();
+        receivers = new ArrayList<>();
         YukiLib.get().getServer().getMessenger().registerIncomingPluginChannel(YukiLib.get(), "BungeeCord", this);
     }
 
@@ -57,8 +59,17 @@ public class BungeecordChannelMessageReceived implements PluginMessageListener{
                     default:
                         break;
                 }
+
+                for(BungeecordChannelMessageReceivedObject obj : receivers){
+                    obj.received(this);
+                }
+                
             }
         }
+    }
+
+    public void registerObject(BungeecordChannelMessageReceivedObject obj){
+        receivers.add(obj);
     }
 
     private void read(ByteArrayDataInput in, int lines) {
